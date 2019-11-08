@@ -23,22 +23,7 @@ services:
   tb1:
     volumes:
       - tb-log-volume:/var/log/thingsboard
-  tb2:
-    volumes:
-      - tb-log-volume:/var/log/thingsboard
-  tb-coap-transport:
-    volumes:
-      - tb-coap-transport-log-volume:/var/log/tb-coap-transport
-  tb-http-transport1:
-    volumes:
-      - tb-http-transport-log-volume:/var/log/tb-http-transport
-  tb-http-transport2:
-    volumes:
-      - tb-http-transport-log-volume:/var/log/tb-http-transport
   tb-mqtt-transport1:
-    volumes:
-      - tb-mqtt-transport-log-volume:/var/log/tb-mqtt-transport
-  tb-mqtt-transport2:
     volumes:
       - tb-mqtt-transport-log-volume:/var/log/tb-mqtt-transport
 
@@ -49,12 +34,6 @@ volumes:
   tb-log-volume:
     external: true
     name: ${TB_LOG_VOLUME}
-  tb-coap-transport-log-volume:
-    external: true
-    name: ${TB_COAP_TRANSPORT_LOG_VOLUME}
-  tb-http-transport-log-volume:
-    external: true
-    name: ${TB_HTTP_TRANSPORT_LOG_VOLUME}
   tb-mqtt-transport-log-volume:
     external: true
     name: ${TB_MQTT_TRANSPORT_LOG_VOLUME}

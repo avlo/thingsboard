@@ -1,3 +1,4 @@
+#!/bin/bash
 #
 # Copyright © 2016-2019 The Thingsboard Authors
 #
@@ -14,22 +15,10 @@
 # limitations under the License.
 #
 
-version: '2.2'
+set -e
 
-services:
-  postgres:
-    restart: always
-    image: "postgres:9.6"
-    ports:
-    - "5432"
-    environment:
-      POSTGRES_DB: thingsboard
-    volumes:
-      - ./tb-node/postgres:/var/lib/postgresql/data
-  tb1:
-    env_file:
-      - tb-node.postgres.env
-    depends_on:
-      - kafka
-      - redis
-      - postgres
+source compose-utils.sh
+
+ADDITIONAL_COMPOSE_ARGS=$(additionalComposeArgs) || exit $?
+
+docker-compose -f docker-compose.yml $ADDITIONAL_COMPOSE_ARGS restart $@

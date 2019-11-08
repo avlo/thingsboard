@@ -34,9 +34,9 @@
     </properties>
 
     <modules>
-        <module>http</module>
+<!--        <module>http</module> -->
         <module>mqtt</module>
-        <module>coap</module>
+<!--       <module>coap</module> -->
     </modules>
 
 </project>
