@@ -409,16 +409,6 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.thingsboard.common.transport</groupId>
-                <artifactId>http</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.thingsboard.common.transport</groupId>
-                <artifactId>coap</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>org.thingsboard</groupId>
                 <artifactId>dao</artifactId>
                 <version>${project.version}</version>
@@ -832,14 +822,6 @@
                 <groupId>redis.clients</groupId>
                 <artifactId>jedis</artifactId>
                 <version>${jedis.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.sun.winsw</groupId>
-                <artifactId>winsw</artifactId>
-                <version>${winsw.version}</version>
-                <classifier>bin</classifier>
-                <type>exe</type>
-                <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>org.elasticsearch.client</groupId>

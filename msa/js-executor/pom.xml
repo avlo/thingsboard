@@ -40,18 +40,7 @@
         <pkg.unixLogFolder>/var/log/${pkg.name}</pkg.unixLogFolder>
         <pkg.installFolder>/usr/share/${pkg.name}</pkg.installFolder>
         <pkg.linux.dist>${project.build.directory}/package/linux</pkg.linux.dist>
-        <pkg.win.dist>${project.build.directory}/package/windows</pkg.win.dist>
     </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>com.sun.winsw</groupId>
-            <artifactId>winsw</artifactId>
-            <classifier>bin</classifier>
-            <type>exe</type>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
 
     <build>
         <plugins>
@@ -81,31 +70,6 @@
                         </goals>
                         <configuration>
                             <arguments>install</arguments>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>copy-winsw-service</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>com.sun.winsw</groupId>
-                                    <artifactId>winsw</artifactId>
-                                    <classifier>bin</classifier>
-                                    <type>exe</type>
-                                    <destFileName>service.exe</destFileName>
-                                </artifactItem>
-                            </artifactItems>
-                            <outputDirectory>${pkg.win.dist}</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
@@ -153,28 +117,6 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>copy-win-conf</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${pkg.win.dist}/conf</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>config</directory>
-                                    <excludes>
-                                        <exclude>tb-js-executor.conf</exclude>
-                                    </excludes>
-                                    <filtering>true</filtering>
-                                </resource>
-                            </resources>
-                            <filters>
-                                <filter>src/main/filters/windows.properties</filter>
-                            </filters>
-                        </configuration>
-                    </execution>
-                    <execution>
                         <id>copy-control</id>
                         <phase>process-resources</phase>
                         <goals>
@@ -190,25 +132,6 @@
                             </resources>
                             <filters>
                                 <filter>src/main/filters/unix.properties</filter>
-                            </filters>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>copy-windows-control</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${pkg.win.dist}</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>src/main/scripts/windows</directory>
-                                    <filtering>true</filtering>
-                                </resource>
-                            </resources>
-                            <filters>
-                                <filter>src/main/filters/windows.properties</filter>
                             </filters>
                         </configuration>
                     </execution>
@@ -253,26 +176,6 @@
                         <phase>package</phase>
                         <goals>
                             <goal>invoke</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.0.0</version>
-                <configuration>
-                    <finalName>${pkg.name}</finalName>
-                    <descriptors>
-                        <descriptor>src/main/assembly/windows.xml</descriptor>
-                    </descriptors>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>assembly</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
                         </goals>
                     </execution>
                 </executions>
