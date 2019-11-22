@@ -15,6 +15,7 @@
 #
 
 FROM debian:stretch
+#FROM alpine:latest
 
 COPY start-js-executor.sh ${pkg.name}.deb /tmp/
 

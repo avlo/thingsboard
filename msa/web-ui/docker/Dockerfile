@@ -15,6 +15,7 @@
 #
 
 FROM debian:stretch
+#FROM alpine:latest
 
 COPY start-web-ui.sh ${pkg.name}.deb /tmp/
 

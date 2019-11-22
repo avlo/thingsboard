@@ -20,7 +20,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.thingsboard</groupId>
     <artifactId>thingsboard</artifactId>
-    <version>2.4.1-SNAPSHOT</version>
+    <version>2.4.1</version>
     <packaging>pom</packaging>
 
     <name>Thingsboard</name>
@@ -149,12 +149,24 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.0.2</version>
+                    <version>3.1.2</version>
                 </plugin>
+                <plugin>
+    <groupId>org.apache.maven.shared</groupId>
+    <artifactId>file-management</artifactId>
+    <version>3.0.0</version>
+                </plugin>
+
+                <plugin>
+      <groupId>org.apache.maven.shared</groupId>
+      <artifactId>maven-shared-io</artifactId>
+      <version>3.0.0</version>
+                </plugin>
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-assembly-plugin</artifactId>
-                    <version>3.0.0</version>
+                    <version>3.1.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
@@ -394,16 +406,6 @@
             <dependency>
                 <groupId>org.thingsboard.common.transport</groupId>
                 <artifactId>mqtt</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.thingsboard.common.transport</groupId>
-                <artifactId>http</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.thingsboard.common.transport</groupId>
-                <artifactId>coap</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -822,14 +824,6 @@
                 <version>${jedis.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.sun.winsw</groupId>
-                <artifactId>winsw</artifactId>
-                <version>${winsw.version}</version>
-                <classifier>bin</classifier>
-                <type>exe</type>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
                 <groupId>org.elasticsearch.client</groupId>
                 <artifactId>rest</artifactId>
                 <version>${elasticsearch.version}</version>
@@ -880,6 +874,19 @@
                 <artifactId>uap-java</artifactId>
                 <version>${ua-parser.version}</version>
             </dependency>
+<dependency>
+    <groupId>org.apache.maven.shared</groupId>
+    <artifactId>file-management</artifactId>
+    <version>3.0.0</version>
+</dependency>
+
+
+    <dependency>
+      <groupId>org.apache.maven.shared</groupId>
+      <artifactId>maven-shared-io</artifactId>
+      <version>3.0.0</version>
+    </dependency>
+
         </dependencies>
     </dependencyManagement>
 
