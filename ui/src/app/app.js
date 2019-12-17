@@ -81,7 +81,7 @@ import thingsboardRaf from './common/raf.provider';
 import thingsboardUtils from './common/utils.service';
 import thingsboardDashboardUtils from './common/dashboard-utils.service';
 import thingsboardTypes from './common/types.constant';
-import thingsboardApiTime from './api/timekwh.service';
+import thingsboardApiTime from './api/time.service';
 import thingsboardKeyboardShortcut from './components/keyboard-shortcut.filter';
 import thingsboardHelp from './help/help.directive';
 import thingsboardToast from './services/toast';
