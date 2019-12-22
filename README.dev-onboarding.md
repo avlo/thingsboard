@@ -1,27 +1,25 @@
 below useful info & links to get developers started working locally
-# REQUIRED TOOLS
-| Tool | (Working) Version |
-| ------ | ------ |
-| git | 2.17.1 |
-| java | openjdk 1.8.0_151 |
-| maven | Apache Maven 3.6.1 |
-| npm | 6.11.3 |
-| gradle | 4.4.1 |
 
-*optional for using modular/clustered architecture*
-| Tool | (Working) Version |
-| ------ | ------ |
-| docker | 19.03.5 |
-| docker-compose | 1.17.1 |
+# REQUIRED TOOLS
+Tool | (Working) Version
+--- | ---
+git | 2.17.1
+java | openjdk 1.8.0_151
+maven | Apache Maven 3.6.1
+npm | 6.11.3
+gradle | 4.4.1
+
+below optional for using modular or clustered architecture:
+
+Tool | (Working) Version
+--- | ---
+docker | 19.03.5
+docker-compose | 1.17.1
 
 # REPOSITORIES
-our github project source-code repo:
+greenfutureworks TB source-code repo:
 https://github.com/avlo/thingsboard/
-
-current branch:
-https://github.com/avlo/thingsboard/tree/release-2.4.2-SNAPSHOT
-
-send nick a github request to get pull request and branch creation permission
+*send nick a github request to get pull request and branch creation permission*
 
 # ARCHITECTURE
 
@@ -94,12 +92,11 @@ widget development
 
 # RAY'S REQUEST
 
-if tenant & customer are not automatically created, you'll need to login as sysadmin@thingsboard.org (pass: sysadmin) then create a tenant.  then as a tenant, create a customer.  
+*if tenant & customer are not already created, you'll need to login as sysadmin@thingsboard.org (pass: sysadmin) then create a tenant.  then as a tenant, create a customer.*
 
 #### CREATE TELEMETRY
 git pull pub-sub scripts:
-	https://github.com/avlo/pub-sub
-
+https://github.com/avlo/pub-sub
 update attributes-data.json and telemetry-data.json as needed
 
 #### RAYS ISSUE & HOW TO REPRODUCE
