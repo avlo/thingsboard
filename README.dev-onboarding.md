@@ -30,9 +30,9 @@ https://thingsboard.io/docs/reference/msa/
 
 as mentioned earlier, if you use above modular architecture, you'll also need docker and docker-compose.
 
-(if you prefer to use monolithic architecture locally instead of modular):
+(if you prefer to use monolithic architecture locally instead of modular:
 
-https://thingsboard.io/docs/reference/monolithic/
+https://thingsboard.io/docs/reference/monolithic/)
 
 *note: for either architecture, we only use mqtt (no http/soap) transport for device telemetry.*
 # CONFIGURE BUILD ENVIRONMENT
