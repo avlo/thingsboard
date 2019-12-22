@@ -25,11 +25,14 @@ https://github.com/avlo/thingsboard/
 # ARCHITECTURE
 
 modular architecture (what we use in production and what i use locally):
+
 https://thingsboard.io/docs/reference/msa/
+
 as mentioned earlier, if you use above modular architecture, you'll also need docker and docker-compose.
 
 (if you prefer to use monolithic architecture locally instead of modular):
-	https://thingsboard.io/docs/reference/monolithic/
+
+https://thingsboard.io/docs/reference/monolithic/
 
 *note: for either architecture, we only use mqtt (no http/soap) transport for device telemetry.*
 # CONFIGURE BUILD ENVIRONMENT
@@ -38,7 +41,7 @@ for either modular/monolithic architecture, TB mvn uses gradle to build sub-modu
 
 for java, run below command or add it to your **~/.bashrc** file:
 ```sh
-$ export MAVEN_OPTS="-Djavax.net.ssl.trustStore=/home/nick/apps/java/java-1.8.0-openjdk-1.8.0.151-1.b12.el6_9.x86_64/jre/lib/security/cacerts"
+$ export MAVEN_OPTS="-Djavax.net.ssl.trustStore=<path_to_your>/java-1.8.0-openjdk-1.8.0.151-1.b12.el6_9.x86_64/jre/lib/security/cacerts"
 ```
 and for gradle, add following lines to **/<your_home_dir>/.gradle/gradle.properties** file:
 ```sh
@@ -93,7 +96,12 @@ widget development
 
 # RAY'S REQUEST
 
-*if tenant & customer are not already created, you'll need to login as sysadmin@thingsboard.org (pass: sysadmin) then create a tenant.  then as a tenant, create a customer.*
+*if tenant & customer are not already created, you'll need to login as 
+
+sysadmin@thingsboard.org 
+(pass: sysadmin) 
+
+then create a tenant.  then as a tenant, create a customer.*
 
 #### CREATE TELEMETRY
 git pull pub-sub scripts:
@@ -106,11 +114,12 @@ update attributes-data.json and telemetry-data.json as needed
 
 [official bug submitted to TB](https://github.com/thingsboard/thingsboard/issues/2268)
 
-[here's the file](https://github.com/thingsboard/thingsboard/pull/2271/commits/735bba10536d32b4a06560997c053b7ad8902880) that was modified by TB developers for initial "hiding" fix.  this might be useful as a starting source file to go for future widget work.
+[file that was modified by TB developers](https://github.com/thingsboard/thingsboard/pull/2271/commits/735bba10536d32b4a06560997c053b7ad8902880) for initial "hiding" fix.  this might be useful as a starting source file to go for future widget work.
 
-the [widget development documentation](https://thingsboard.io/docs/user-guide/contribution/widgets-development/) guide might also accomplish same fix as above without modifying application code:
+[widget development documentation](https://thingsboard.io/docs/user-guide/contribution/widgets-development/) guide might also accomplish same fix as above without modifying application code:
 	
 ### ADDITIONAL RESOURCES
 
-cloud application hosting by digitalocean.com
-we use a docker docklet there and pull docker images from our own docker hub repo at https://hub.docker.com/r/avlo/
+cloud application hosting by http://digitalocean.com
+
+we run a docker-based docklet there and pull docker images from our own docker hub repo at https://hub.docker.com/r/avlo/
