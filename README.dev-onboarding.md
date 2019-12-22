@@ -19,6 +19,7 @@ docker-compose | 1.17.1
 # REPOSITORIES
 greenfutureworks TB source-code repo:
 https://github.com/avlo/thingsboard/
+
 *send nick a github request to get pull request and branch creation permission*
 
 # ARCHITECTURE
@@ -96,18 +97,18 @@ widget development
 
 #### CREATE TELEMETRY
 git pull pub-sub scripts:
+
 https://github.com/avlo/pub-sub
+
 update attributes-data.json and telemetry-data.json as needed
 
 #### RAYS ISSUE & HOW TO REPRODUCE
 
 [official bug submitted to TB](https://github.com/thingsboard/thingsboard/issues/2268)
 
-here's the file that was modified by TB developers for initial "hiding" fix.  this might be useful as a starting source file to go for future widget work.
-	https://github.com/thingsboard/thingsboard/pull/2271/commits/735bba10536d32b4a06560997c053b7ad8902880
+[here's the file](https://github.com/thingsboard/thingsboard/pull/2271/commits/735bba10536d32b4a06560997c053b7ad8902880) that was modified by TB developers for initial "hiding" fix.  this might be useful as a starting source file to go for future widget work.
 
-the widget development documentation guide might also accomplish same fix as above without modifying application code:
-	https://thingsboard.io/docs/user-guide/contribution/widgets-development/
+the [widget development documentation](https://thingsboard.io/docs/user-guide/contribution/widgets-development/) guide might also accomplish same fix as above without modifying application code:
 	
 ### ADDITIONAL RESOURCES
 
