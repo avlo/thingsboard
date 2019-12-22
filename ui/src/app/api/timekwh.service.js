@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 export default angular.module('thingsboard.api.time', [])
-    .factory('timeService', TimeService)
+    .factory('timeService', TimeKwhService)
     .name;
 
 const SECOND = 1000;
@@ -22,15 +22,17 @@ const MINUTE = 60 * SECOND;
 const HOUR = 60 * MINUTE;
 const DAY = 24 * HOUR;
 
-const MIN_INTERVAL = SECOND;
-const MAX_INTERVAL = 365 * 20 * DAY;
+//const MIN_INTERVAL = SECOND;
+const MIN_INTERVAL = HOUR;
+//const MAX_INTERVAL = 365 * 20 * DAY;
+const MAX_INTERVAL =  MIN_INTERVAL; 
 
 const MIN_LIMIT = 10;
 //const AVG_LIMIT = 200;
 //const MAX_LIMIT = 500;
 
 /*@ngInject*/
-function TimeService($translate, $http, $q, types) {
+function TimeKwhService($translate, $http, $q, types) {
 
     var predefIntervals;
     var maxDatapointsLimit;
@@ -44,7 +46,7 @@ function TimeService($translate, $http, $q, types) {
         getIntervals: getIntervals,
         matchesExistingInterval: matchesExistingInterval,
         boundToPredefinedInterval: boundToPredefinedInterval,
-        defaultTimewindow: defaultTimewindow,
+        defaultTimewindow: defaultTimeKwhWindow,
         toHistoryTimewindow: toHistoryTimewindow,
         createSubscriptionTimewindow: createSubscriptionTimewindow,
         getMaxDatapointsLimit: function () {
@@ -123,80 +125,8 @@ function TimeService($translate, $http, $q, types) {
         if (!predefIntervals) {
             predefIntervals = [
                 {
-                    name: $translate.instant('timeinterval.seconds-interval', {seconds: 1}, 'messageformat'),
-                    value: 1 * SECOND
-                },
-                {
-                    name: $translate.instant('timeinterval.seconds-interval', {seconds: 5}, 'messageformat'),
-                    value: 5 * SECOND
-                },
-                {
-                    name: $translate.instant('timeinterval.seconds-interval', {seconds: 10}, 'messageformat'),
-                    value: 10 * SECOND
-                },
-                {
-                    name: $translate.instant('timeinterval.seconds-interval', {seconds: 15}, 'messageformat'),
-                    value: 15 * SECOND
-                },
-                {
-                    name: $translate.instant('timeinterval.seconds-interval', {seconds: 30}, 'messageformat'),
-                    value: 30 * SECOND
-                },
-                {
-                    name: $translate.instant('timeinterval.minutes-interval', {minutes: 1}, 'messageformat'),
-                    value: 1 * MINUTE
-                },
-                {
-                    name: $translate.instant('timeinterval.minutes-interval', {minutes: 2}, 'messageformat'),
-                    value: 2 * MINUTE
-                },
-                {
-                    name: $translate.instant('timeinterval.minutes-interval', {minutes: 5}, 'messageformat'),
-                    value: 5 * MINUTE
-                },
-                {
-                    name: $translate.instant('timeinterval.minutes-interval', {minutes: 10}, 'messageformat'),
-                    value: 10 * MINUTE
-                },
-                {
-                    name: $translate.instant('timeinterval.minutes-interval', {minutes: 15}, 'messageformat'),
-                    value: 15 * MINUTE
-                },
-                {
-                    name: $translate.instant('timeinterval.minutes-interval', {minutes: 30}, 'messageformat'),
-                    value: 30 * MINUTE
-                },
-                {
                     name: $translate.instant('timeinterval.hours-interval', {hours: 1}, 'messageformat'),
                     value: 1 * HOUR
-                },
-                {
-                    name: $translate.instant('timeinterval.hours-interval', {hours: 2}, 'messageformat'),
-                    value: 2 * HOUR
-                },
-                {
-                    name: $translate.instant('timeinterval.hours-interval', {hours: 5}, 'messageformat'),
-                    value: 5 * HOUR
-                },
-                {
-                    name: $translate.instant('timeinterval.hours-interval', {hours: 10}, 'messageformat'),
-                    value: 10 * HOUR
-                },
-                {
-                    name: $translate.instant('timeinterval.hours-interval', {hours: 12}, 'messageformat'),
-                    value: 12 * HOUR
-                },
-                {
-                    name: $translate.instant('timeinterval.days-interval', {days: 1}, 'messageformat'),
-                    value: 1 * DAY
-                },
-                {
-                    name: $translate.instant('timeinterval.days-interval', {days: 7}, 'messageformat'),
-                    value: 7 * DAY
-                },
-                {
-                    name: $translate.instant('timeinterval.days-interval', {days: 30}, 'messageformat'),
-                    value: 30 * DAY
                 }
             ];
         }
@@ -230,6 +160,39 @@ function TimeService($translate, $http, $q, types) {
         return boundedInterval;
     }
 
+    function defaultTimeKwhWindow() {
+        var currentTime = (new Date).getTime();
+        var timewindow = {
+            displayValue: "",
+            selectedTab: 0,            
+            hideInterval: false,
+            hideAggregation: false,
+            hideAggInterval: false,
+            realtime: {
+                interval: HOUR,
+                timewindowMs: HOUR // was originally 1 min by default, see next function
+            },
+            history: {
+                historyType: 0,
+                    interval: HOUR,
+                    timewindowMs: HOUR, // was originally 1 min by default, see next function
+                    fixedTimewindow: {
+                        startTimeMs: currentTime - DAY, // 1 day by default
+                        endTimeMs: currentTime
+                    }
+            },
+            aggregation: {
+                type: types.aggregation.avg.value,
+                limit: Math.floor(maxDatapointsLimit / 2)
+            }
+        }
+        return timewindow;
+    }
+
+/** 
+
+below function should not be used in kwh scenario
+
     function defaultTimewindow() {
         var currentTime = (new Date).getTime();
         var timewindow = {
@@ -258,6 +221,7 @@ function TimeService($translate, $http, $q, types) {
         }
         return timewindow;
     }
+*/
 
     function toHistoryTimewindow(timewindow, startTimeMs, endTimeMs, interval) {
         if (timewindow.history) {
@@ -280,9 +244,6 @@ function TimeService($translate, $http, $q, types) {
 
 
         var historyTimewindow = {
-            hideInterval: timewindow.hideInterval || false,
-            hideAggregation: timewindow.hideAggregation || false,
-            hideAggInterval: timewindow.hideAggInterval || false,
             history: {
                 fixedTimewindow: {
                     startTimeMs: startTimeMs,
@@ -305,7 +266,7 @@ function TimeService($translate, $http, $q, types) {
             fixedWindow: null,
             realtimeWindowMs: null,
             aggregation: {
-                interval: SECOND,
+                interval: HOUR,
                 limit: maxDatapointsLimit,
                 type: types.aggregation.avg.value
             }
@@ -313,14 +274,14 @@ function TimeService($translate, $http, $q, types) {
         var aggTimewindow = 0;
         if (stateData) {
             subscriptionTimewindow.aggregation = {
-                interval: SECOND,
+                interval: HOUR,
                 limit: maxDatapointsLimit,
                 type: types.aggregation.none.value,
                 stateData: true
             };
         } else {
             subscriptionTimewindow.aggregation = {
-                interval: SECOND,
+                interval: HOUR,
                 limit: maxDatapointsLimit,
                 type: types.aggregation.avg.value
             };
@@ -374,7 +335,7 @@ function TimeService($translate, $http, $q, types) {
 
     function boundIntervalToTimewindow(timewindow, intervalMs, aggType) {
         if (aggType === types.aggregation.none.value) {
-            return SECOND;
+            return HOUR;
         } else {
             var min = minIntervalLimit(timewindow);
             var max = maxIntervalLimit(timewindow);
