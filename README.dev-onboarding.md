@@ -38,7 +38,7 @@ https://thingsboard.io/docs/reference/monolithic/
 
 for either modular/monolithic architecture, TB mvn uses gradle to build sub-modules, so you'll need to configure both maven and gradle truststore.  
 
-for java, run below command or add it to your **~/.bashrc** file:
+for maven, run below command to add MAVEN_OPTS to your local environment or add directly to your **~/.bashrc** file:
 ```sh
 $ export MAVEN_OPTS="-Djavax.net.ssl.trustStore=<path_to_your>/java-1.8.0-openjdk-1.8.0.151-1.b12.el6_9.x86_64/jre/lib/security/cacerts"
 ```
@@ -84,6 +84,7 @@ to stop running services, from same directory run:
 # USEFUL DOCUMENTATION
 
 some useful thingsboard links:
+
 thingsboard documentation home:
 	https://thingsboard.io/docs/	
 	
@@ -95,12 +96,12 @@ widget development
 
 # RAY'S REQUEST
 
-*if tenant & customer are not already created, you'll need to login as 
+*if tenant & customer are not already created, you'll need to login as*
 
-sysadmin@thingsboard.org 
-(pass: sysadmin) 
+*sysadmin@thingsboard.orgi*
+*(pass: sysadmin)*
 
-then create a tenant.  then as a tenant, create a customer.*
+*then create a tenant.  then as a tenant, create a customer.*
 
 #### CREATE TELEMETRY
 git pull pub-sub scripts:
