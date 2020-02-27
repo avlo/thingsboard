@@ -37,8 +37,6 @@
     <modules>
         <module>transport-api</module>
         <module>mqtt</module>
-        <module>http</module>
-        <module>coap</module>
     </modules>
 
 </project>
